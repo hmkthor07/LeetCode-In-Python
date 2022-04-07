@@ -45,7 +45,7 @@ class Solution:
             mid = (left + right) // 2
 
             if(l[mid]== target):
-                if(mid==(len(l)-1) or (mid>=-1 and l[mid+1]!=target)):
+                if(mid==(len(l)-1) or (mid<=(len(l)-1) and l[mid+1]!=target)):
                     return mid
                 left = mid + 1 
             elif(l[mid]>target):
