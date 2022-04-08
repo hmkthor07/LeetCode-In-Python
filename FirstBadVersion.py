@@ -13,6 +13,8 @@ if a version is bad, all versions after it are bad.
 Brute Force : Linear Search : O(N)
 Optimal Solution : Binary Search : O(log N)
 
+버전은 1~N 까지 이다. 
+
 """
 
 from typing import List
@@ -21,22 +23,20 @@ class Soultion:
     def isBadVersion(self, target: int) -> bool:
         return target >= 3
 
-    def findFirstBadVersion(self, versions: List[int]) -> int:
-        if len(versions) < 1:
-            return -1
-        
-        left = 0
-        right = len(versions)-1
+    def findFirstBadVersion(self, n: int) -> int:
+        left = 1
+        right = n 
 
-        while (left <= right):
-            mid = (left + right)//2
-            if self.isBadVersion(versions[mid]): # bad 버전이면 
-                if ( mid == 0 or ( mid-1>=0 and self.isBadVersion(versions[mid-1]) == False) ):
-                    return mid
-                else:
-                    right = mid - 1
+        while (left < right):
+            mid = (left + right) // 2
+            if (self.isBadVersion(mid)):
+                right = mid
             else:
                 left = mid + 1
-        return -1
+        return left
+
+s = Soultion()
+answer = s.findFirstBadVersion(10)
+print(answer)
 
 
