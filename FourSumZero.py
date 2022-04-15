@@ -33,6 +33,26 @@ class Solution:
 
         return total_cnt
 
+    def fourSumCountBetter(self, a:tuple, b:tuple, c:tuple, d:tuple)->int:
+
+        m = {}
+        answer = 0
+        for itemA in a:
+            for itemB in b:
+                sum = itemA+itemB
+                if sum not in m:
+                    m[sum] = 0
+                m[sum] += 1
+
+        for itemC in c:
+            for itemD in d:
+                sum = -(itemC+itemD)
+                if sum in m:
+                    answer += m[sum]
+        
+        return answer
+
+
 s = Solution()
-answer = s.fourSumCount((1,2),(-2,-1),(-1,2),(0,2))
+answer = s.fourSumCountBetter((1,2),(-2,-1),(-1,2),(0,2))
 print(answer)
