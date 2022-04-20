@@ -56,7 +56,35 @@ class Solution:
                 hashPat[t[i]] = 0
             hashPat[t[i]] += 1
 
-            
+        count = 0
+        left = 0
+        startIndex = -1
+        minLen = float("inf")
+
+        for right in range(len1):
+            if hashStr.get(s[right] is None):
+                hashStr[s[right]] = 0
+            hashStr[s[right]] += 1
+
+            if hashPat.get(s[right]) is None:
+                hashPat[s[right]] = 0
+
+            if hashStr.get(s[right]) <= hashPat.get(s[right]):
+                count += 1
+
+            if count == len2:
+                while hashStr.get(s[left]) > hashPat.get(s[left]):
+                    hashStr[s[left]] -= 1
+                    left += 1
+
+                minLen = min(minLen, (right-left+1))
+                startIndex = left
+
+        if startIndex == -1:
+            return ""
+        return s[startIndex:startIndex+minLen]
+
+
 
 
 s = Solution()
