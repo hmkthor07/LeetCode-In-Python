@@ -42,11 +42,11 @@ class Solution:
 
     # 문자열이 서로 같을 때, 
     def findMWS2(self, s:str, t:str) -> str:
-       len1 = len(s)
-       len2 = len(t)
+        len1 = len(s)
+        len2 = len(t)
 
-       if (len1<len2):
-           return ""
+        if(len1<len2):
+            return ""
         
         hashPat = {}
         hashStr = {}
@@ -62,7 +62,7 @@ class Solution:
         minLen = float("inf")
 
         for right in range(len1):
-            if hashStr.get(s[right] is None):
+            if hashStr.get(s[right]) is None:
                 hashStr[s[right]] = 0
             hashStr[s[right]] += 1
 
@@ -88,7 +88,6 @@ class Solution:
 
 
 s = Solution()
-answer = s.findMWS("ADOBECODEBANCC","ABC")
 answer = s.findMWS2("ADOBECODDEBANCC","DDE")
 print(answer)                
 
