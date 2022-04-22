@@ -29,6 +29,26 @@ class LinkedList:
             temp = temp.next
         print(linked_list)
 
+    def insertNode(self, val, pos):
+        target = Node(val)
+        if pos == 0:
+            target.next = self.head
+            self.head = target
+            return
+        
+        def getPrev(pos):
+            temp = self.head
+            count = 1
+            while count < pos:
+                temp = temp.next
+                count += 1
+            return temp
+
+        prev = getPrev(pos)
+        nextNode = prev
+        prev.next = target
+        target.next = nextNode
+
 # Node Structure : 5 -> 1 -> 3 -> 7
 
 linked_list = LinkedList()
