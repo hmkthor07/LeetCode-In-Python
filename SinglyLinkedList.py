@@ -31,6 +31,7 @@ class LinkedList:
 
     def insertNode(self, val, pos):
         target = Node(val)
+
         if pos == 0:
             target.next = self.head
             self.head = target
@@ -45,9 +46,31 @@ class LinkedList:
             return temp
 
         prev = getPrev(pos)
-        nextNode = prev
+        nextNode = prev.next
         prev.next = target
         target.next = nextNode
+
+    def deleteNode(self, key):
+        temp = self.head
+        
+        if temp is None:
+            return
+
+        if temp.data == key:
+            self.head = temp.next
+            temp = None
+            return
+        
+        while temp.next is not None and temp.next.data != key:
+            if temp.next:
+                temp = temp.next
+        
+        if temp.next is not None:
+            target_node = temp.next
+            temp.next = target_node.next
+            target_node.next = None
+        else:
+            return
 
 # Node Structure : 5 -> 1 -> 3 -> 7
 
@@ -61,4 +84,9 @@ linked_list.head.next = second_node
 second_node.next = third_node
 third_node.next = fourth_node
 
+linked_list.insertNode(9,2)
+
+linked_list.printList()
+
+linked_list.deleteNode(111)
 linked_list.printList()
