@@ -43,9 +43,59 @@ class LinkedList:
 
         print(linked_list)
 
+    def countList(self):
+        temp = self.head
+        count = 0 
+
+        while temp is not None:
+            temp = temp.next
+            count += 1
+        return count
+
+    def insertAtLocation(self, value, index):
+        temp = self.head
+
+        count = self.countList()
+
+        if count+1 < index:
+            return temp
+        
+        newNode = Node(value)
+
+        if index == 1:
+            newNode.next = temp
+            temp.prev = newNode
+            self.head = newNode
+            return self.head
+        
+        if index == count + 1:
+            while temp.next is not None:
+                temp = temp.next
+            
+            temp.next = newNode
+            newNode.prev = temp
+            return self.head
+
+        i = 1
+        while i < index-1:
+            temp = temp.next
+            i += 1
+        
+        nodeAtTarget = temp.next
+        newNode.next = nodeAtTarget
+        nodeAtTarget.prev = newNode
+        temp.next = newNode
+        newNode.prev = temp
+
+        return self.head
+
+
+
+
 # 1 -> 2 -> 3 -> 4 -> 5
 arr = [1,2,3,4,5]
 
 llist = LinkedList()
 llist.creatList(arr)
+llist.insertAtLocation(77,3)
 llist.printList()
