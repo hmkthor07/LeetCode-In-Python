@@ -89,7 +89,43 @@ class LinkedList:
 
         return self.head
 
+    def deleteAtLocation(self, index):
+        temp = self.head
 
+        count = self.countList()
+
+        if count < index:
+            return temp
+
+        if index == 1:
+            temp = temp.nexst
+            self.head = temp
+            return self.head
+
+        i = 1
+        if index == count:
+            while i < index-1:
+                temp = temp.next
+                i += 1
+            
+            targetNode = temp.next
+            targetNode = None
+            temp.next = None
+
+        i = 1
+        if 1 < index and index < count:
+            while i != index-1:
+                temp = temp.next
+                i += 1
+            targetNode = temp.next
+            temp.next = targetNode.next
+            targetNode.next.prev = temp
+
+            targetNode = None
+            
+
+
+        
 
 
 # 1 -> 2 -> 3 -> 4 -> 5
