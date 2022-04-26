@@ -102,26 +102,25 @@ class LinkedList:
             self.head = temp
             return self.head
 
-        i = 1
-        if index == count:
-            while i < index-1:
+        if count == index:
+            while temp.next is not None and temp.next.next is not None:
                 temp = temp.next
-                i += 1
-            
-            targetNode = temp.next
-            targetNode = None
             temp.next = None
+            return self.head
 
         i = 1
-        if 1 < index and index < count:
-            while i != index-1:
-                temp = temp.next
-                i += 1
-            targetNode = temp.next
-            temp.next = targetNode.next
-            targetNode.next.prev = temp
 
-            targetNode = None
+        while i < index-1:
+            temp = temp.next
+            i += 1
+        
+        targetNode = temp.next
+        temp.next = targetNode.next
+        targetNode.prev = temp
+        targetNode = None
+
+        return self.head
+
             
 
 
@@ -134,4 +133,5 @@ arr = [1,2,3,4,5]
 llist = LinkedList()
 llist.creatList(arr)
 llist.insertAtLocation(77,3)
+llist.deleteAtLocation(3)
 llist.printList()
