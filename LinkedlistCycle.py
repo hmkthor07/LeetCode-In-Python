@@ -14,6 +14,8 @@ class Solution:
         hare = head
         turtle = head
 
+        # TC : O(N) 
+        # SC : O(1)
         while turtle and hare and hare.next:
             hare = hare.next.next
             turtle = turtle.next
@@ -36,6 +38,6 @@ node_1.next = node_5
 node_5.next = node_11
 node_11.next = node_8
 node_8.next = node_9
-node_9.next = node_5
+#node_9.next = node_5
 
 print(s. hasCycle(node_1))
