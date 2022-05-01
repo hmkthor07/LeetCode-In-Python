@@ -14,18 +14,40 @@ class LinkedNode:
 
 
 class Solution:
-    def reverseLinkedList(self, l:LinkedNode) -> LinkedNode:
+    
 
-        firstNode = l
-        firstNode.next = None
+    def reverseLinkedList2(self, head:LinkedNode) -> LinkedNode:
+        node = None
 
-        if firstNode.next is None:
-            return firstNode
+        while head is not None:
+            next = head.next
+            head.next = node
+            node = head
+            head = next
 
-        while l.next:
-            prevNode = l
-            nextNode = l.next
-            nextNode.next = prevNode
-            l = l.next
-            
-        return nextNode
+        return node
+
+s = Solution()
+
+node_1 = LinkedNode(1)
+node_2 = LinkedNode(2)
+node_3 = LinkedNode(3)
+node_4 = LinkedNode(4)
+node_5 = LinkedNode(5)
+
+node_1.next = node_2
+node_2.next = node_3
+node_3.next = node_4
+node_4.next = node_5
+node_5.next = None
+
+
+
+answer = s.reverseLinkedList2(node_1)
+
+while answer:
+    print(answer.val)
+    answer=answer.next
+
+
+
