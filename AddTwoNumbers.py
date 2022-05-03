@@ -19,52 +19,47 @@ class LinkedNode:
 
 class Solution:
     def addTwoSum(self, l1:LinkedNode, l2:LinkedNode)-> LinkedNode:
-        
-        head = NOne
-        ans = None
-        sum = 0
+        ans = LinkedNode(None)
         carry = 0
-        remain = 0
+        sum = 0
+        pointer:LinkedNode = ans
 
-        while l1 is not None and l2 is not None:
-            sum = l1.val + l2.val + carry
-            if sum >= 10:
-                carry = 1
-                remain = sum - 10
-            else:
-                carry = 0
-                remain = sum
+        while (l1!=None or l2!=None):
+            sum = carry
+            if l1!=None:
+                sum += l1.val
+                l1=l1.next
+            if l2!=None:
+                sum += l2.val
+                l2=l2.next
             
-            if ans is not None:
-                ans.next = LinkedNode(remain)
-            else:
-                head = LinkedNode(remain)
-                ans = head
-            
-            l1 = l1.next
-            l2 = l2.next
-
-        while l1:
-            sum = l1.val + carry
-            if sum >= 10:
-                carry = 1
-                remain = sum - 10
-            else:
-                carry = 0
-                remain = sum
-            
-            ans.next = LinkedNode(remain)
+            carry = int(sum/10)
+            pointer.next = LinkedNode(sum%10)
+            pointer = pointer.next
         
-        while l2:
-            sum = l2.val + carry
-            if sum >= 10:
-                carry = 1
-                remain = sum - 10
-            else:
-                carry = 0
-                remain = sum
-            
-            ans.next = LinkedNode(remain)
+        if carry > 0:
+            pointer.next = LinkedNode(carry)
+        
+        return ans.next
 
+s = Solution()
 
-        return head
+l1_node_2 = LinkedNode(2)
+l1_node_4 = LinkedNode(4)
+l1_node_3 = LinkedNode(3)
+
+l1_node_2.next = l1_node_4
+l1_node_4.next = l1_node_3
+
+l2_node_5 = LinkedNode(5)
+l2_node_6 = LinkedNode(6)
+l2_node_4 = LinkedNode(4)
+
+l2_node_5.next = l2_node_6
+l2_node_6.next = l2_node_4
+
+ans = s.addTwoSum(l1_node_2, l2_node_5)
+
+while ans:
+    print(ans.val)
+    ans = ans.next
