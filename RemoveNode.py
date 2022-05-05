@@ -34,15 +34,38 @@ class Solution:
         num = 0
         while head:
             num += 1
-            head = head.next
             nextNode = head.next
 
             if num == cnt-n_th:
                 head.next = nextNode.next
                 return temp
+            
+            head = head.next
 
         if num == 1:
             return None
+
+        if num == cnt:
+            return temp.next
                 
+
+s = Solution()
+node_1 = LinkedNode(1)
+node_2 = LinkedNode(2)
+node_3 = LinkedNode(3)
+node_4 = LinkedNode(4)
+node_5 = LinkedNode(5)
+
+node_1.next = node_2
+node_2.next = node_3
+node_3.next = node_4
+node_4.next = node_5
+
+ans = s.removeNode(5, node_1)
+
+while ans:
+    print(ans.val)
+    ans = ans.next
+
         
 
