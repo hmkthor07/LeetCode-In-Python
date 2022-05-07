@@ -18,36 +18,23 @@ class LinkedNode:
         self.next = None
 
 class Solution:
-    def removeNode(self, n_th:int, l:LinkedNode) -> LinkedNode:  
+    def removeNode(self, n_th:int, head:LinkedNode) -> LinkedNode:  
+        ans = LinkedNode(0)
+        ans.next = head
 
-        temp = l
-        head = l
+        front = ans
+        back = ans
 
-        cnt = 0
-        while l:
-            cnt += 1
-            if l.next:
-                l = l.next
-            else:
-                break
+        for i in range(1, n_th+2):
+            front = front.next
 
-        num = 0
-        while head:
-            num += 1
-            nextNode = head.next
+        while front is not None:
+            front = front.next
+            back = back.next
 
-            if num == cnt-n_th:
-                head.next = nextNode.next
-                return temp
-            
-            head = head.next
+        back.next = back.next.next
 
-        if num == 1:
-            return None
-
-        if num == cnt:
-            return temp.next
-                
+        return ans.next
 
 s = Solution()
 node_1 = LinkedNode(1)
