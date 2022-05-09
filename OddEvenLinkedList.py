@@ -18,36 +18,21 @@ class ListNode:
 
 class Solution:
     def setOddEvenLinkedList(self, head:ListNode) -> ListNode:
-        tempNode = ListNode(0)
-        tempNode.next = head
-
-        newNode = head
-        ans = newNode
-
-        while head.next and head.next.next is not None:
-            head = head.next.next
-            newNode.next = head
         
-        while tempNode.next and tempNode.next.next is not None:
-            tempNode = tempNode.next.next
-            newNode.next = tempNode
+        if not head:
+            return head
 
-        return ans
+        odd = head
+        even = odd.next
+        evenList = even
 
-node1 = ListNode(1)
-node2 = ListNode(2)
-node3 = ListNode(3)
-node4 = ListNode(4)
-node5 = ListNode(5)
+        while even and even.next:
+            odd.next = even.next
+            odd = odd.next
 
-node1.next = node2
-node2.next = node3
-node3.next = node4
-node4.next = node5
+            even.next = odd.next
+            even = even.next
 
-s = Solution()
-ans = s.setOddEvenLinkedList(node1)
+        odd.next = evenList
 
-while ans:
-    print(ans.val)
-    ans = ans.next
+        return head
